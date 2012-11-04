@@ -1,0 +1,25 @@
+{% load url from future %}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+{% load urlize_quoted_links %}
+{% load add_query_param %}
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<title>helloWorld</title>
+		
+		<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+	<h1>Hello, world!</h1>
+	{{message}}
+	
+	<div class="progress progress-striped active" >
+  		<div class="bar" style="width: 40%;"></div>
+	</div>
+	</body>
+</html>

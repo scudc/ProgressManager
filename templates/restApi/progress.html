@@ -1,0 +1,82 @@
+{% extends "restApi/base.html" %}
+{% block titile %}进度查看 {% endblock %}
+{% block script %}
+	
+	
+	//get the value of the parm of url	
+	function getUrlParam(name)
+	{
+    	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+    	var r = window.location.search.substr(1).match(reg);  
+    	if (r!=null) return unescape(r[2]); return null; 
+	}  
+
+		/**
+		* update the the table progress bar
+		* @param progressData (the json str) [{"instanceId":"1","progressBarData":"20%"},{"instanceId":"1","progressBarData":"20%"}]
+		* @return nothing
+		*/
+		function updateProgress()
+		{
+			var idList = getUrlParam("idList");
+			jQuery.get("/getProgressBarData?idList="+idList, function(progress) { 
+				
+				var progressObjList = jQuery.parseJSON(progress);
+				jQuery.each(progressObjList,function(i,progressObj)
+				{
+					var instanceId = progressObj.instanceId;
+					var progressBarData = progressObj.progressBarData;
+					var progress_div = "progress_bar_" + instanceId;
+					jQuery("#"+progress_div).css("width",progressBarData);
+				});
+				
+			
+			})
+			setTimeout( "updateProgress()", 3000);
+		}
+		
+		//init the page by onload
+		$(document).ready(function(){
+			updateProgress();
+		});
+		
+		
+		
+
+
+{%endblock%}
+
+{% block content %}
+
+	<div class="hero-unit">
+  
+       
+				<table class="table table-bordered" id="progress_table">
+				<thead>
+				<tr>
+					<th>id</th>
+					<th>实例名称</th>
+					<th>进度条</th>
+					<th>查看日志</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for item in progressDataSet %}
+				<tr>
+					<td>{{ item.progressId }}</td>
+					<td>{{ item.progressName }}</td>
+					<td>
+						<div class="progress progress-striped active">
+  							<div class="bar" style="width: 0%;" id="progress_bar_{{item.progressId}}"></div>
+						</div>
+					</td>
+					<td><a href='xxx_{{ item.progressId }}'>查看日志</a></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+				</table>
+
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load url from future %}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+{% load urlize_quoted_links %}
+{% load add_query_param %}
+{% load static %}
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="description" content="Here&#39;s a few examples on how to implement AJAX functionality in a django application, using the jQuery JavaScript library.">
+    <title>{% block titile %} {% endblock %}</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	{% block script %}{%endblock%}
+	</script>
+</head>
+<body >
+	<div class="page-header">
+	<h1>进度查看  <small>可查看进度和操作日志</small></h1>
+	</div>
+	
+	<div id="main">
+    <div id="content">
+      {% block content %}{% endblock %}
+
+    </div>
+  	</div>
+
+  	<footer class="footer">
+
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p >Designed and built with all the love in the world </p>
+		<p >author:hobodong</p>
+		<p >email:scudongchao@gmail.com</p>
+
+    </footer>
+</body>
+</html>
