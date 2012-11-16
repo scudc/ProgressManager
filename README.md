@@ -8,3 +8,5 @@
 整个服务是通过django提供http服务。
 
 后续第一版开发完成可以在完成使用文档。
+
+发送进度数据curl命令：curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"execStat":"succ","cmdTypeName": "cmd_ds", "progressId": 1, "progressStat": "start", "remark": "start","progressName":"1.1.1.1"}' http://127.0.0.1:8000
