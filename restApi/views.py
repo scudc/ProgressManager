@@ -10,12 +10,13 @@ g_state_length = 10
 #get the request by progress id
 def getProgress(request):
     progressIdList = request.GET.get('idList').split(",")
+    cmdTypeName = request.GET.get('cmd')
     progressDataSet = []
     
     for pro_id in progressIdList:
             progressData = {}
             if len(pro_id) != 0:
-                progressList = ProgressRateData.objects.order_by('created').filter(progressId=pro_id)
+                progressList = ProgressRateData.objects.order_by('created').filter(progressId=pro_id,cmdTypeName=cmdTypeName)
                 if len(progressList) < 1:
                     continue
                 progress = progressList[0]

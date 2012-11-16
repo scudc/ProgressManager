@@ -5,7 +5,7 @@ from models import ProgressRateData
 
 class MyModelResource(ModelResource):
     model = ProgressRateData
-    fields = ('progressId', 'progressStat', 'remark', 'url')
+    fields = ('cmdTypeName','progressId', 'progressStat', 'remark', 'url','progressName')
     ordering = ('created',)
 
     def url(self, instance):
