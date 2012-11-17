@@ -4,6 +4,7 @@ from resources import MyModelResource
 from django.contrib import admin
 from views import getProgress
 from views import getProgressBarData
+from views import getProgressLog
 from django.conf import settings
 
 admin.autodiscover()
@@ -17,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^getProgress/',getProgress),
     url(r'^getProgressBarData$',getProgressBarData),
+    url(r'^getProgressLog/',getProgressLog),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,})
 )

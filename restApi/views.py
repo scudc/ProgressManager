@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from models import ProgressRateData
 from django.conf import settings
 import json
-
+from utils import dumps
 context = {"STATIC_URL":settings.STATIC_URL} 
 g_state_length = 10
 #get the request by progress id
@@ -47,7 +47,15 @@ def getProgressBarData(request):
         return HttpResponse(json.dumps(progressDataSet),mimetype)
     else:
         return HttpResponse(status=400)
-    
-    
+
+#get the progress log info by progress id   
+def getProgressLog(request):
+    progressId = request.GET.get('id')
+    cmdTypeName = request.GET.get('cmd')
+    progressList = ProgressRateData.objects.order_by('created').filter(progressId=progressId,cmdTypeName=cmdTypeName)
+    context['progressData'] = dumps(progressList)
+    print  dumps(progressList)
+    return render_to_response('restApi/progressInfo.html',context)
+      
         
 
